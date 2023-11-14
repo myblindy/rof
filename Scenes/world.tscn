@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://t87snyuknhwu"]
+
+[ext_resource type="PackedScene" uid="uid://bf1mam1x5m0re" path="res://Assets/Characters/Worker/worker.tscn" id="1_2vnfu"]
+[ext_resource type="Script" path="res://Scenes/world.gd" id="1_pu6wd"]
+[ext_resource type="PackedScene" uid="uid://bxgcp57qn33ty" path="res://Assets/Characters/Objects/Trees/tree.tscn" id="2_5bir3"]
+[ext_resource type="Script" path="res://Scenes/WorldCamera.gd" id="2_xpgoq"]
+[ext_resource type="PackedScene" uid="uid://bf08n0cu8c7rd" path="res://Assets/Characters/Objects/Tools/axe.tscn" id="4_vkv0c"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_pu6wd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.692567, -0.474575, 0.543259, -0.0202959, 0.739992, 0.672309, -0.721068, -0.476645, 0.502862, 8.94071, 9.65966, 14.8607)
+current = true
+fov = 40.903
+script = ExtResource("2_xpgoq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.984328, 0.0430586, 0.17101, -0.17101, 0.469846, 0.866025, -0.0430586, -0.881697, 0.469846, 0, 0, 0)
+sky_mode = 1
+
+[node name="tree" parent="." instance=ExtResource("2_5bir3")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 2.16069, 0, -1.02467)
+
+[node name="tree2" parent="." instance=ExtResource("2_5bir3")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 3.074, 0, 9.549)
+
+[node name="tree3" parent="." instance=ExtResource("2_5bir3")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 3.074, 0, 11.712)
+
+[node name="worker" parent="." instance=ExtResource("1_2vnfu")]
+
+[node name="worker2" parent="." instance=ExtResource("1_2vnfu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.28802, 0, 6.27917)
+
+[node name="axe" parent="." instance=ExtResource("4_vkv0c")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.70398, 0, 3)
+
+[node name="axe2" parent="." instance=ExtResource("4_vkv0c")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27199, -7.10543e-15, 10.5116)

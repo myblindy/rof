@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=3 uid="uid://bf1mam1x5m0re"]
+
+[ext_resource type="PackedScene" uid="uid://wuwyinp3aedn" path="res://Assets/Characters/Worker/worker.glb" id="1_xhljh"]
+[ext_resource type="Script" path="res://Assets/Characters/Worker/worker.gd" id="2_3uo45"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6h5jv"]
+animation = &"chop"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_upvqu"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w73cr"]
+animation = &"pick-up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_652ax"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bqtbg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hg1lj"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k572r"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0b2hy"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3jepp"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6trwj"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3kxlh"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kqkga"]
+states/End/position = Vector2(830, 100)
+states/chop/node = SubResource("AnimationNodeAnimation_6h5jv")
+states/chop/position = Vector2(441, 194)
+states/idle/node = SubResource("AnimationNodeAnimation_upvqu")
+states/idle/position = Vector2(343, 100)
+states/pick-up/node = SubResource("AnimationNodeAnimation_w73cr")
+states/pick-up/position = Vector2(399, -2)
+states/walk/node = SubResource("AnimationNodeAnimation_652ax")
+states/walk/position = Vector2(529, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_bqtbg"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_hg1lj"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_k572r"), "idle", "chop", SubResource("AnimationNodeStateMachineTransition_0b2hy"), "idle", "pick-up", SubResource("AnimationNodeStateMachineTransition_3jepp"), "pick-up", "idle", SubResource("AnimationNodeStateMachineTransition_6trwj"), "chop", "idle", SubResource("AnimationNodeStateMachineTransition_3kxlh")]
+graph_offset = Vector2(-46, -35)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2go8y"]
+
+[node name="worker" instance=ExtResource("1_xhljh")]
+script = ExtResource("2_3uo45")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0.00308063, 0.416886, -0.0010085)
+bones/0/rotation = Quaternion(-0.0343624, -0.04661, -0.0230474, 0.998056)
+bones/1/rotation = Quaternion(0.0419798, 0.0151775, 0.0208226, 0.998786)
+bones/2/rotation = Quaternion(0.0117894, 0.00395511, 0.014424, 0.999819)
+bones/3/rotation = Quaternion(0.0115741, 0.00414242, 0.0144444, 0.99982)
+bones/4/rotation = Quaternion(0.0442069, -0.00187419, 0.00467622, 0.99901)
+bones/5/rotation = Quaternion(-0.0755767, 0.00864652, 0.00010745, 0.997102)
+bones/7/rotation = Quaternion(0.682094, 0.324602, -0.487874, 0.437447)
+bones/8/rotation = Quaternion(0.482849, 0.137836, 0.121281, 0.856241)
+bones/9/rotation = Quaternion(-0.000236787, -2.21409e-06, 0.0136036, 0.999907)
+bones/11/rotation = Quaternion(0.68349, -0.321227, 0.506129, 0.416519)
+bones/12/rotation = Quaternion(0.409659, -0.226259, -0.132233, 0.873785)
+bones/13/rotation = Quaternion(-0.000957364, 1.92369e-06, -0.0579765, 0.998318)
+bones/15/rotation = Quaternion(0.136827, 0.0766143, 0.984401, -0.0797639)
+bones/15/scale = Vector3(1.00003, 0.999928, 1.00004)
+bones/16/rotation = Quaternion(-0.175308, -0.00563459, 0.0431046, 0.983554)
+bones/16/scale = Vector3(0.999998, 0.999932, 1.00007)
+bones/17/position = Vector3(-8.76753e-09, 0.15019, -1.99685e-08)
+bones/17/rotation = Quaternion(0.527868, -0.0616975, -0.0537272, 0.845377)
+bones/17/scale = Vector3(0.999868, 1.00027, 0.99986)
+bones/18/position = Vector3(-2.45665e-07, 0.114701, 2.29733e-06)
+bones/18/rotation = Quaternion(0.332115, -0.25529, 0.0691082, 0.905401)
+bones/18/scale = Vector3(0.999294, 1.00029, 1.00042)
+bones/20/rotation = Quaternion(-0.0918857, -0.0758446, 0.992425, -0.0299432)
+bones/20/scale = Vector3(0.999998, 0.999973, 1.00003)
+bones/21/rotation = Quaternion(-0.0123882, 0.0833528, -0.0403022, 0.995628)
+bones/21/scale = Vector3(1, 0.99999, 1.00001)
+bones/22/position = Vector3(-4.63479e-09, 0.150424, 1.00043e-08)
+bones/22/rotation = Quaternion(0.511985, 0.0475283, 0.016199, 0.857526)
+bones/22/scale = Vector3(0.999928, 1.00013, 0.999945)
+bones/23/position = Vector3(1.58299e-06, 0.110991, 1.12953e-06)
+bones/23/rotation = Quaternion(0.358816, 0.251768, -0.065001, 0.896459)
+bones/23/scale = Vector3(0.999588, 1.00012, 1.00029)
+
+[node name="RightHandAttachmentParent" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.706842, -0.0656087, 0.704322, 0.0289496, -0.992172, -0.121476, 0.706779, 0.106254, -0.699409, -0.170125, 0.407014, 0.0392539)
+bone_name = "mixamorig_RightHand"
+bone_idx = 14
+
+[node name="RightHandAttachment" type="Node3D" parent="Armature/Skeleton3D/RightHandAttachmentParent" index="0"]
+transform = Transform3D(0.722291, 0.00525018, -0.691569, 0.0048637, 0.999908, 0.0126709, 0.691572, -0.0125155, 0.722199, -3.76776e-05, 0.0505663, -0.00290167)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_kqkga")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_2go8y")
