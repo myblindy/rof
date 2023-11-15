@@ -4,19 +4,19 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cp2chow38rohe"
-path="res://.godot/imported/axe.glb-92e29608397fc5cc5b5ab6d2043e7ce4.scn"
+path="res://.godot/imported/axe.glb-7b62ba0c7a48161175b2de319a84a342.scn"
 
 [deps]
 
-source_file="res://Assets/Characters/Objects/Tools/axe.glb"
-dest_files=["res://.godot/imported/axe.glb-92e29608397fc5cc5b5ab6d2043e7ce4.scn"]
+source_file="res://Assets/Characters/Objects/WorldItems/Tools/axe.glb"
+dest_files=["res://.godot/imported/axe.glb-7b62ba0c7a48161175b2de319a84a342.scn"]
 
 [params]
 
 nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
-nodes/root_scale=1.0
+nodes/root_scale=0.5
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true

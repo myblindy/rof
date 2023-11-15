@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf08n0cu8c7rd"]
+
+[ext_resource type="PackedScene" uid="uid://cp2chow38rohe" path="res://Assets/Characters/Objects/WorldItems/Tools/axe.glb" id="1_jpj3h"]
+[ext_resource type="Script" path="res://Assets/Characters/Objects/WorldItems/Tools/axe.gd" id="2_fnldn"]
+
+[node name="axe" instance=ExtResource("1_jpj3h")]
+script = ExtResource("2_fnldn")
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(0.002, 3.01992e-10, -3.01992e-10, 3.01992e-10, -0.002, -4.63221e-24, -3.01992e-10, -4.55995e-17, -0.002, 0.0354196, 0.448419, 0.0150772)
+
+[node name="Axe1_obj_cleaner_materialmerger_gles" parent="Sketchfab_model" index="0"]
+transform = Transform3D(1, 6.6815e-22, 0, 6.6815e-22, 1, 0, 0, 1.69407e-21, 1, -9.51753, 115.13, 16.3175)

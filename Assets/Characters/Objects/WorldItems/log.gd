@@ -1,8 +1,8 @@
-extends Node3D
-class_name TreeObject
+extends WorldItemBase
+class_name LogObject
 
 func get_interaction_range() -> float:
-	return 0.1
+	return 0.2
 
 func get_interaction_duration_sec() -> float:
-	return 4
+	return 6

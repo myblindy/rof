@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b14c4x5te6aa6"]
+
+[ext_resource type="PackedScene" uid="uid://4rtfofft82fi" path="res://Assets/Characters/Objects/WorldItems/log.fbx" id="1_3xgo7"]
+[ext_resource type="Script" path="res://Assets/Characters/Objects/WorldItems/log.gd" id="2_3ot07"]
+
+[node name="log" instance=ExtResource("1_3xgo7")]
+script = ExtResource("2_3ot07")
+
+[node name="RootNode" parent="." index="0"]
+transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0.164, 0)
