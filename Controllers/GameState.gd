@@ -11,6 +11,8 @@ static var available_world_items: Array[WorldItemBase] = []
 
 static var type_helpers := preload("res://Helpers/TypeHelpers.cs").new()
 
+const axe_tool_name := "axe"
+
 static func find_world_item(owner: Node3D, className: String, remove: bool = false) -> WorldItemBase:
 	var found_item: WorldItemBase
 	var found_item_distance_squared := -1.0

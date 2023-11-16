@@ -25,6 +25,11 @@ window/vsync/vsync_mode=2
 
 project/assembly_name="rof"
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
+
 [input]
 
 camera_left={

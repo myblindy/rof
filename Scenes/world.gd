@@ -23,7 +23,7 @@ func _ready() -> void:
 	_logger_orders($"worker-log")
 	
 	for worker in GameState.workers:
-		worker.input_event.connect(func(camera: Camera3D, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void: 
+		worker.input_event.connect(func(_camera: Camera3D, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void: 
 			if event is InputEventMouseButton and event.is_pressed and event.button_index == 1:
 				get_viewport().set_input_as_handled()
 				selected_object = worker)
@@ -59,7 +59,7 @@ func _logger_orders(worker: Worker) -> void:
 		
 	# refine a log
 	while true:
-		var log := GameState.find_world_item(worker, "log", true)
-		if log:
-			await worker.work_on(log)
+		var log_object := GameState.find_world_item(worker, "log", true)
+		if log_object:
+			await worker.work_on(log_object)
 		await get_tree().process_frame

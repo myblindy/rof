@@ -10,17 +10,30 @@ var _held_item: Node3D
 
 signal _completed
 
+enum AnimationType { Idle, Walk, PickUp, Chop }
+
 func get_interaction_range() -> float:
 	return 0.2;
 
 func _ready() -> void:
+	$Nameplate.text = name
 	set_process(false)
-	
-func _set_idle() -> void:
-	_animation_state_machine.travel("idle")
 
+func set_animation(animation_type: AnimationType) -> void:
+	var animation_name: String
+	match animation_type:
+		AnimationType.Idle:
+			animation_name = "idle"
+		AnimationType.Walk:
+			animation_name = "walk"
+		AnimationType.PickUp:
+			animation_name = "pick-up"
+		AnimationType.Chop:
+			animation_name = "chop"
+	_animation_state_machine.travel(animation_name)
+ 
 func walk_to(target: Node3D) -> void:
-	_animation_state_machine.travel("walk")
+	set_animation(AnimationType.Walk)
 	_movement_target = target
 	look_at(_movement_target.position)
 	set_process(true)
@@ -30,7 +43,7 @@ func pick_up(target: Node3D) -> void:
 	await walk_to(target)
 	
 	# TODO: pickup time
-	_animation_state_machine.travel("pick-up")
+	set_animation(AnimationType.PickUp)
 	await get_tree().create_timer(2.5).timeout
 	
 	# drop held item
@@ -47,44 +60,10 @@ func pick_up(target: Node3D) -> void:
 	_right_hand_attachment.add_child(target)
 	
 	await _animation_tree.animation_finished
-	_set_idle()
+	set_animation(AnimationType.Idle)
 	
 func work_on(target: Node3D) -> void:
-	if target is TreeObject and _held_item is AxeTool:
-		await walk_to(target)
-	
-		_animation_state_machine.travel("chop")
-		await get_tree().create_timer(target.get_interaction_duration_sec()).timeout
-		
-		# destroy tree and add log in its place
-		target.queue_free()
-		
-		var log := GameState.log_scene.instantiate()
-		log.position = target.position
-		log.rotation = Vector3(0, randf_range(0, PI * 2), 0)
-		GameState.available_world_items.push_back(log)
-		GameState.world.add_child(log)
-		
-		_set_idle()
-		
-	elif target is LogObject and _held_item is AxeTool:
-		await walk_to(target)
-		
-		_animation_state_machine.travel("chop")
-		await get_tree().create_timer(target.get_interaction_duration_sec()).timeout
-		
-		# destroy log and add plank in its place
-		target.queue_free()
-		
-		for i in 3:
-			var plank := GameState.plank_scene.instantiate()
-			plank.position = target.position + Vector3(0, i * 0.1, 0)
-			plank.rotation = Vector3(0, randf_range(0, PI * 2), 0)
-			GameState.available_world_items.push_back(plank)
-			GameState.world.add_child(plank)
-			
-		_set_idle()
-		
+	await RecipeController.work(self, _held_item, [target])
 	
 func _process(delta: float) -> void:
 	var movement_direction := _movement_target.position - position
@@ -100,6 +79,6 @@ func _process(delta: float) -> void:
 		
 		position = position + movement_direction * speed
 	else:
-		_set_idle()
+		set_animation(AnimationType.Idle)
 		_completed.emit()
 		set_process(false)

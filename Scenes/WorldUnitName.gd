@@ -1,6 +1,6 @@
 extends Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	set_process(false)
 	GameState.world.selected_object_changed.connect(_world_selected_object_changed)
 	_world_selected_object_changed()
