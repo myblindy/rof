@@ -6,7 +6,14 @@ class_name Worker
 @onready var _animation_state_machine: AnimationNodeStateMachinePlayback = _animation_tree["parameters/playback"]
 
 var _movement_target: Node3D
-var _held_item: Node3D
+var held_item: Node3D
+
+var ai_steps: Array[BaseAIStep] = []
+signal current_ai_step_changed
+var current_ai_step: int:
+	set(new_current_ai_step):
+		current_ai_step = new_current_ai_step
+		current_ai_step_changed.emit()
 
 signal _completed
 
@@ -17,6 +24,7 @@ func get_interaction_range() -> float:
 
 func _ready() -> void:
 	$Nameplate.text = name
+	run_ai()
 	set_process(false)
 
 func set_animation(animation_type: AnimationType) -> void:
@@ -47,23 +55,29 @@ func pick_up(target: Node3D) -> void:
 	await get_tree().create_timer(2.5).timeout
 	
 	# drop held item
-	if _held_item:
-		_right_hand_attachment.remove_child(_held_item)
-		_held_item.position = position
-		GameState.world.add_child(_held_item)
+	if held_item:
+		_right_hand_attachment.remove_child(held_item)
+		held_item.position = position
+		GameState.world.add_child(held_item)
 		
 	# pick up new item
 	GameState.world.remove_child(target)
 	target.position = Vector3.ZERO
 	target.rotation = Vector3.ZERO
-	_held_item = target
+	held_item = target
 	_right_hand_attachment.add_child(target)
 	
 	await _animation_tree.animation_finished
 	set_animation(AnimationType.Idle)
-	
-func work_on(target: Node3D) -> void:
-	await RecipeController.work(self, _held_item, [target])
+
+func run_ai():
+	while true:
+		if current_ai_step < ai_steps.size():
+			var ai_step := ai_steps[current_ai_step]
+			current_ai_step += 1
+			await ai_step.run()
+		else:
+			await get_tree().process_frame
 	
 func _process(delta: float) -> void:
 	var movement_direction := _movement_target.position - position

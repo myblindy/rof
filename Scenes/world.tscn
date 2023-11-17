@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://t87snyuknhwu"]
+[gd_scene load_steps=10 format=3 uid="uid://t87snyuknhwu"]
 
 [ext_resource type="PackedScene" uid="uid://bf1mam1x5m0re" path="res://Assets/Characters/Worker/worker.tscn" id="1_2vnfu"]
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_pu6wd"]
-[ext_resource type="PackedScene" uid="uid://bxgcp57qn33ty" path="res://Assets/Characters/Objects/Trees/tree.tscn" id="2_5bir3"]
+[ext_resource type="PackedScene" uid="uid://bxgcp57qn33ty" path="res://Assets/Characters/Objects/WorldItems/Trees/tree.tscn" id="2_5bir3"]
 [ext_resource type="Script" path="res://Scenes/WorldCamera.gd" id="2_xpgoq"]
 [ext_resource type="PackedScene" uid="uid://bf08n0cu8c7rd" path="res://Assets/Characters/Objects/WorldItems/Tools/axe.tscn" id="4_vkv0c"]
 [ext_resource type="Script" path="res://Scenes/WorldFPSLabel.gd" id="6_ojjh4"]
 [ext_resource type="Script" path="res://Scenes/WorldUnitName.gd" id="7_1u5t1"]
+[ext_resource type="Script" path="res://Scenes/WorldAIStepsView.gd" id="8_1tkcs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2s6u"]
 albedo_color = Color(0, 0.105882, 0, 1)
@@ -105,6 +106,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Selection Name"
 script = ExtResource("7_1u5t1")
+
+[node name="AI Steps View" type="Label" parent="SelectionUI/VBox"]
+layout_mode = 2
+script = ExtResource("8_1tkcs")
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)

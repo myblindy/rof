@@ -1,4 +1,4 @@
-extends Node3D
+extends BaseWorldItem
 class_name TreeObject
 
 func get_interaction_range() -> float:

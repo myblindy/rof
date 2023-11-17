@@ -1,4 +1,4 @@
-extends WorldItemBase
+extends BaseWorldItem
 class_name LogObject
 
 func get_interaction_range() -> float:

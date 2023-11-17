@@ -1,10 +1,10 @@
 extends Object
 class_name RecipeController
 
-static func work(worker: Worker, tool: BaseTool, inputs: Array[Node3D]) -> Array[WorldItemBase]:
+static func work(worker: Worker, inputs: Array[Node3D]) -> Array[BaseWorldItem]:
 	
 	# cut tree
-	if tool is AxeTool and inputs.size() == 1 and inputs[0] is TreeObject:
+	if worker.held_item is AxeTool and inputs.size() == 1 and inputs[0] is TreeObject:
 		var tree := inputs[0] as TreeObject
 		await worker.walk_to(tree)
 		
@@ -25,7 +25,7 @@ static func work(worker: Worker, tool: BaseTool, inputs: Array[Node3D]) -> Array
 		return [log_instance]
 	
 	# refine logs into planks
-	if tool is AxeTool and inputs.size() == 1 and inputs[0] is LogObject:
+	if worker.held_item is AxeTool and inputs.size() == 1 and inputs[0] is LogObject:
 		var log_object := inputs[0] as LogObject
 		await worker.walk_to(log_object)
 		
@@ -35,7 +35,7 @@ static func work(worker: Worker, tool: BaseTool, inputs: Array[Node3D]) -> Array
 		# destroy log_object and add planks in its place
 		log_object.queue_free()
 		
-		var result: Array[WorldItemBase] = []
+		var result: Array[BaseWorldItem] = []
 		for i in 3:
 			var plank := GameState.plank_scene.instantiate()
 			plank.position = log_object.position + Vector3(0, i * 0.1, 0)

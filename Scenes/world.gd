@@ -11,12 +11,12 @@ func _ready() -> void:
 	GameState.world = self
 	selected_object = null
 	for child in get_children():
-		if child is WorldItemBase:
+		if child is TreeObject:
+			GameState.available_trees.push_back(child)
+		elif child is BaseWorldItem:
 			GameState.available_world_items.push_back(child)
 		elif child is Worker:
 			GameState.workers.push_back(child)
-		elif child is TreeObject:
-			GameState.available_trees.push_back(child)
 			
 	_chopper_orders($"worker-tree")
 	_chopper_orders($"worker-tree2")
@@ -33,33 +33,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		selected_object = null
 	
 func _chopper_orders(worker: Worker) -> void:
-	# get tool
-	while true:
-		var axe := GameState.find_world_item(worker, "axe", true)
-		if axe:
-			await worker.pick_up(axe)
-			break
-		await get_tree().process_frame
-	
-	# chop tree
-	while true:	
-		var tree := GameState.find_tree(worker, true)
-		if tree:
-			await worker.work_on(tree)
-		await get_tree().process_frame
+	worker.ai_steps = [
+		PickupToolAIStep.new(worker, GameState.axe_tool_name),
+		ManualRecipeAIStep.new(worker, [GameState.tree_name]),
+		JumpAIStep.new(worker, 1)
+	]
 
 func _logger_orders(worker: Worker) -> void:
-	# get tool
-	while true:
-		var axe := GameState.find_world_item(worker, "axe", true)
-		if axe:
-			await worker.pick_up(axe)
-			break
-		await get_tree().process_frame
-		
-	# refine a log
-	while true:
-		var log_object := GameState.find_world_item(worker, "log", true)
-		if log_object:
-			await worker.work_on(log_object)
-		await get_tree().process_frame
+	worker.ai_steps = [
+		PickupToolAIStep.new(worker, GameState.axe_tool_name),
+		ManualRecipeAIStep.new(worker, [GameState.log_name]),
+		JumpAIStep.new(worker, 1)
+	]

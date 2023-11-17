@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dstyp7ebckj3u"]
 
-[ext_resource type="Script" path="res://Assets/Characters/Objects/WorldItems/WorldItemBase.gd" id="1_2q7kj"]
+[ext_resource type="Script" path="res://Assets/Characters/Objects/WorldItems/BaseWorldItem.gd" id="1_78f8j"]
 [ext_resource type="Texture2D" uid="uid://1uf0vnevqx54" path="res://Assets/Characters/Objects/WorldItems/plank.jpg" id="2_bdgw8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slrt1"]
@@ -45,7 +45,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_u31gk")
 
 [node name="plank" type="Node3D"]
-script = ExtResource("1_2q7kj")
+script = ExtResource("1_78f8j")
 
 [node name="Cube_005" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 10, 0, -10, -4.37114e-07, 0, 0.0126338, -9.40932e-09)
